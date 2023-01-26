@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <title>
+            RSA
+        </title>
+    </head>
+    <body>
+        <h3>
+            Prime 1:
+            <input type="number" id="p">
+        </h3>
+        <h3>
+            Prime 2:
+            <input type="number" id="q">
+        </h3>
+        <h3>
+            Message:
+            <input type="number" id="msg">
+        </h3>
+        <button onclick="rsa()">
+            RSA
+        </button>
+        <script>
+            function rsa()
+            {
+                var p, q, msg, pq, pi, e, d, c, t;
+                p = document.getElementById("p").value;
+                q = document.getElementById("q").value;
+                msg = document.getElementById("msg").value;
+                pq = p * q;
+                pi = (p - 1) * (q - 1);
+                gcd = function (a, b) { return (!b) ? a : gcd(b, a % b); };
+                for (e = 2; e < pi; e++)
+                {
+                    if (gcd(e, pi) == 1)
+                    {
+                        break;
+                    }
+                }
+                d = 3;
+                c = Math.pow(msg, e) % pq;
+                t = Math.pow(c, d) % pq;
+                alert("Public Key: " + e + "\n" + "Private Key: " + d + "\n" + "Encrypted Message: " + c + "\n" + "Decrypted Message: " 
+                + t);
+            }
+        </script>
+    </body>
